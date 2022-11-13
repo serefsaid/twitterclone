@@ -7,14 +7,21 @@ class Tweet extends CI_Controller {
 		$this->load->model('Main_model');
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 	}
+	public function tweet(){
+		$tweet = $this->input->post('tweet');
+		$userID = $this->input->post('userID');
+		$tweet = $this->Main_model->insert('tweets',array('tweet'=>$tweet,'userID'=>$userID));
+		if($tweet){
+			$sent = 0;
+		}else{
+			$sent = 1;
+		}
+		echo $sent;
+	}
 
     function delete($id){
         $tweet = $this->Main_model->delete('tweets',array('id'=>$id));
-        if($tweet){
-            echo "tweet silindi";
-        }else{
-            echo "tweet silme başarısız";
-        }
+        header('main.php');
     }
 
     function like($id){

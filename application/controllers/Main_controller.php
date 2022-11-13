@@ -19,7 +19,7 @@ class Main_controller extends CI_Controller {
 		$password  = $this->input->post('password');
 		$user = $this->Main_model->get('users','id,username',array('username'=>$username,'password'=>$password),true);
 		$tweets = $this->Main_model->get('tweets','*');
-		$setCoookie = setcookie('userID',$user->id);
+		$setCoookie = setcookie('userID',$user->id,time()+(86000*60),"/");
 		$data = array(
 			'user' => $user,
 			'tweets'=>$tweets
@@ -43,19 +43,6 @@ class Main_controller extends CI_Controller {
 			$info = "Bu kullanıcı adı zaten kullanımda!";
 		}
 		echo $info;
-	}
-
-	public function tweet(){
-		$tweet = $this->input->post('tweet');
-		$userID = $this->input->post('userID');
-
-		$tweet = $this->Main_model->insert('tweets',array('tweet'=>$tweet,'userID'=>$userID));
-		if($tweet){
-			$sent = 0;
-		}else{
-			$sent = 1;
-		}
-		echo $sent;
 	}
 
 	public function profile($username){

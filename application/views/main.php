@@ -1,4 +1,4 @@
-<?php
+<?
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <span id="notSentMessage" style="display:none">tweet not sent</span>
 </div>
 <br><br>
-<?php foreach($tweets as $tweet){
+<?foreach($tweets as $tweet){
     if($tweet->userID==$_COOKIE['userID']){
             $mine = 1;
         }else{
@@ -74,10 +74,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
-<?php }?>
+<?}?>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
+/*
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+*/
 $("#tweetInput").keydown(function(e){
     if($('#tweetInput').val()!=''){
         $('#tweetButton').removeAttr('disabled');
@@ -93,7 +98,8 @@ function tweet(){
     var tweet = $("#tweetInput").val();
     var userID = '<?=$_COOKIE['userID']?>';
     if($('#tweetInput').val().length<280){
-        $.post( "<?=base_url();?>Main_controller/tweet",{userID:userID,tweet:tweet} ,function( data ) {
+        $.post( "<?=base_url();?>Tweet/tweet",{userID:userID,tweet:tweet} ,function( data ) {
+            //window.location.href=window.location.href;
             if(data!=1){
                 $('#notSentMessage').removeAttr('style');
             }else{
