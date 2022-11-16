@@ -99,7 +99,6 @@ function tweet(){
     var userID = '<?=$_COOKIE['userID']?>';
     if($('#tweetInput').val().length<280){
         $.post( "<?=base_url();?>Tweet/tweet",{userID:userID,tweet:tweet} ,function( data ) {
-            //window.location.href=window.location.href;
             if(data!=1){
                 $('#notSentMessage').removeAttr('style');
             }else{
