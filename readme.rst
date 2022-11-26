@@ -1,1 +1,1 @@
-twitter clone made by codeigniter 3
+basic twitter clone made by codeigniter 3
